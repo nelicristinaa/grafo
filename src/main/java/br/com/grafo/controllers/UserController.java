@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import br.com.grafo.Repository.UserRepository;
 import br.com.grafo.model.User;
 
 
@@ -31,7 +31,14 @@ public class UserController {
 
    private List<User>  users = new ArrayList<>();
 
+   @Autowired
+   private UserRepository userRepository;
 
+
+   @GetMapping
+   public Iterable<User> list() {
+       return userRepository.findAll();
+   }
 
    //busca o usuário pelo id
     @GetMapping("/{id}")
@@ -48,15 +55,17 @@ public class UserController {
 
     @PostMapping("/")
     public User user(@RequestBody User user){
-        users.add(user);
+      return this.userRepository.save(user);
+      
+       /*  users.add(user);
         return user;
-
+ */
     }
 
-   @GetMapping("/list")
+/*    @GetMapping("/list")
    public List<User> list(){
        return users;
-   }
+   } */
 
     
 
