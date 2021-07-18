@@ -22,7 +22,7 @@ public class GraphController {
     private List<Graph> graphs =  new ArrayList<>();
 
     
-    @GetMapping("/graphw//")
+ /*    @GetMapping("/graphw//")
     public Graph graph(){
         Graph graph = new Graph();
         graph.setSource("a");       
@@ -30,7 +30,7 @@ public class GraphController {
         graph.setDistance(1);
         return graph;
         
-    }
+    } */
     
     @PostMapping("/graph")
     public Graph graph(@RequestBody Graph graph){

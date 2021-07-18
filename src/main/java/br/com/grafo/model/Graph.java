@@ -1,31 +1,24 @@
 package br.com.grafo.model;
 
+import java.util.ArrayList;
+import java.util.ArrayList;
+import java.util.List;
+import antlr.collections.List;
+
+import br.com.grafo.model.routes;
+
 public class Graph {
-    private String source; 
-    private String target;
-    private int distance;
-    
-    public String getSource() {
-        return source;
+   
+
+    private List<Routes> data = new ArrayList<>();
+
+    public List<Routes> getData() {
+        return data;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    public void setData(List<Routes> data) {
+        this.data = data;
     }
 
-    public String getTarget() {
-        return target;
-    }
 
-    public void setTarget(String target) {
-        this.target = target;
-    }
-
-    public int getDistance() {
-        return distance;
-    }
-
-    public void setDistance(int distance) {
-        this.distance = distance;
-    }
 }
