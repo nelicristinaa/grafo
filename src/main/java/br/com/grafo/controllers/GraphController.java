@@ -19,10 +19,10 @@ import br.com.grafo.model.Route;
 
 
 @RestController
-@RequestMapping("/graphs")
+@RequestMapping("/")
 public class GraphController {
 
-    private List<Graph>  graphs = new ArrayList<>();
+  //  private List<Graph>  graphs = new ArrayList<>();
 
 
     @Autowired
@@ -40,7 +40,7 @@ public class GraphController {
     }
 
 
-    @PostMapping("/")
+    @PostMapping("/graph")
     public Graph graph(@RequestBody Graph graph){
         
         return this.graphRepository.save(graph);
@@ -54,15 +54,14 @@ public class GraphController {
 
 
     @GetMapping("/{id}")
-    public Graph user(@PathVariable("id") Long id){
-         System.out.println("o id é: " + id);
-         
-        Optional<Graph> userFind = graphs.stream().filter(graph -> graph.getId() == id).findFirst();
-        
-       if (userFind.isPresent()) {
+    public Graph graph(@PathVariable("id") Long id) {
+  
+      Optional<Graph> userFind = this.graphRepository.findById(id);
+  
+      if (userFind.isPresent()) {
         return userFind.get();
       }
+  
       return null;
-
     }
 }

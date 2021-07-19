@@ -21,9 +21,9 @@ public class Route implements Serializable{
     private String target;
     private int distance;
 
-    @ManyToOne()
+   /*  @ManyToOne()
     @JoinColumn(name="ID_GRAPH")
-    private Graph graph;
+    private Graph graph; */
 
     public String getSource() {
         return source;
@@ -49,13 +49,13 @@ public class Route implements Serializable{
         this.distance = distance;
     }
 
-    public Graph getGraph() {
+   /*  public Graph getGraph() {
         return graph;
     }
 
     public void setGraph(Graph graph) {
         this.graph = graph;
-    }
+    } */
 
     public int getId() {
         return id;
