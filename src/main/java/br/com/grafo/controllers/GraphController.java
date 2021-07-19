@@ -34,7 +34,8 @@ public class GraphController {
     @PostMapping("/route")
     public Route route(@RequestBody Route route){
         
-        return this.routeRepository.save(route);
+         this.routeRepository.save(route);
+        return route;
 
     }
 
