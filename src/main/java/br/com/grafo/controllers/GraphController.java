@@ -28,7 +28,7 @@ import br.com.grafo.controllers.grafo.App;
 import br.com.grafo.controllers.grafo.Dijkstra;
 import br.com.grafo.controllers.grafo.Edge;
 import br.com.grafo.controllers.grafo.Vertex;
-import br.com.grafo.model.Distance;
+
 import br.com.grafo.model.Graph;
 import br.com.grafo.model.Path;
 import br.com.grafo.model.Route;
@@ -100,8 +100,7 @@ public class GraphController {
       
         distancia = app.calc(path, graphFind.get()); 
         String distance = Integer.toString(distancia); 
-        HashMap<Object, Object> map = new HashMap<>();
-     
+        HashMap<Object, Object> map = new HashMap<>();     
        
         map.put("distance", distance);
         
@@ -113,19 +112,34 @@ public class GraphController {
         HashMap<Object, Object> map = new HashMap<>();
      
         map.put("response", "HTTP NOT FOUND");
-        
-        
-        
+                      
           return map;            
-  
-
-      }
-      
-     
-                
-
+        }
     } 
 
-   
+
+
+    @PostMapping("/distance/{graphId}/from/{town1}/to/{town2}")
+    public HashMap<Object, Object> distbairros(@RequestBody Path path, @PathVariable("graphId") Long id, @PathVariable("town1") String town1, @PathVariable("town2") String town2 ){
+      
+      Optional<Graph> graphFind = this.graphRepository.findById(id);
+
+      if (graphFind.isPresent()) {
+      
+        HashMap<Object, Object> map = new HashMap<>();     
+       
+        map.put("distance", graphFind);      
+        return map;      
+        
+      } 
+
+      HashMap<Object, Object> map = new HashMap<>();     
+      map.put("response", "HTTP NOT FOUND");    
+                   
+      return map;  
+
+    }
 
 }
+
+   

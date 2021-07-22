@@ -13,8 +13,8 @@ public class App {
     public int calc(Path path, Graph graph){
 
         Vertex [] v = new Vertex[28]; 
-        String  [] x = {"A","B","C","D","E","G","H","L","M","N","O","p","Q","R","S","T","U","V","W","X","Y","Z" };
-        for(int i = 0; i < 20; i++){
+        String  [] x = {"A","B","C","D","E","F","G","H","I","J", "K", "L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z" };
+        for(int i = 0; i < 25; i++){
                  
        //   System.out.println("x = " + x[i]);        
           v[i] = new Vertex(x[i]); 
@@ -194,4 +194,13 @@ public class App {
       return vertice;
     }
 
+
+    public int calcDistVizinhos(String town1, String town2, Graph graph){
+        int distancia = 0; 
+     
+        return distancia;
+     
+     }
 }
+
+
