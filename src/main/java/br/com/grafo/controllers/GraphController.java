@@ -123,9 +123,10 @@ public class GraphController {
     public HashMap<Object, Object> distbairros(@RequestBody Path path, @PathVariable("graphId") Long id, @PathVariable("town1") String town1, @PathVariable("town2") String town2 ){
       
       Optional<Graph> graphFind = this.graphRepository.findById(id);
-
+      App app = new App();
       if (graphFind.isPresent()) {
-      
+        
+        app.calcDistVizinhos(town1, town2, graphFind.get());
         HashMap<Object, Object> map = new HashMap<>();     
        
         map.put("distance", graphFind);      

@@ -15,8 +15,7 @@ public class App {
         Vertex [] v = new Vertex[28]; 
         String  [] x = {"A","B","C","D","E","F","G","H","I","J", "K", "L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z" };
         for(int i = 0; i < 25; i++){
-                 
-       //   System.out.println("x = " + x[i]);        
+            
           v[i] = new Vertex(x[i]); 
         }
 
@@ -197,7 +196,44 @@ public class App {
 
     public int calcDistVizinhos(String town1, String town2, Graph graph){
         int distancia = 0; 
-     
+
+        Vertex [] v = new Vertex[28]; 
+        String  [] x = {"A","B","C","D","E","F","G","H","I","J", "K", "L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z" };
+        for(int i = 0; i < 25; i++){
+            
+          v[i] = new Vertex(x[i]); 
+        }
+
+       
+         //Percorre todos os grafos
+        for(int i = 0; i < graph.getRoutes().size(); i++){
+          int source = 0;
+          int target = 0;
+          int distance = graph.getRoutes().get(i).getDistance();
+
+
+          
+        
+        
+
+            source = converteVertice(graph.getRoutes().get(i).getSource());
+            target = converteVertice(graph.getRoutes().get(i).getTarget());
+            addVizinho(v[source], distance, v[target]);
+
+            System.out.println("Source: " + source);
+            System.out.println("Target: " + target);
+            System.out.println("Distance: " + distance);
+          
+              
+        }
+
+       int verticeSource = converteVertice(town1);
+       int verticeTarget = converteVertice(town2);
+
+        Dijkstra dijkstra = new Dijkstra();
+        dijkstra.computePath(v[verticeSource]); 
+        System.out.println(dijkstra.getShortestPathTo(v[verticeTarget])); 
+
         return distancia;
      
      }
