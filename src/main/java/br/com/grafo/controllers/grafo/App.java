@@ -196,6 +196,7 @@ public class App {
 
     public int calcDistVizinhos(String town1, String town2, Graph graph){
         int distancia = 0; 
+        int distanciaTotal = 0;
 
         Vertex [] v = new Vertex[28]; 
         String  [] x = {"A","B","C","D","E","F","G","H","I","J", "K", "L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z" };
@@ -230,13 +231,58 @@ public class App {
        int verticeSource = converteVertice(town1);
        int verticeTarget = converteVertice(town2);
 
+
+       //calcula o path
         Dijkstra dijkstra = new Dijkstra();
         dijkstra.computePath(v[verticeSource]); 
         System.out.println(dijkstra.getShortestPathTo(v[verticeTarget])); 
+       
+        //converte para um array de string
+        String[] vertice = new String[dijkstra.getShortestPathTo(v[verticeTarget]).size()]; 
+        for (int j = 0; j < dijkstra.getShortestPathTo(v[verticeTarget]).size(); j++){
+        vertice[j] = dijkstra.getShortestPathTo(v[verticeTarget]).get(j).toString();
+        System.out.println(vertice[j]);
+      }
+
+        //calcula a distancia de cada ponto
+       
+        for(int i = 0; i < vertice.length - 1; i++){
+          String targetVertex = null;
+          String sourceVertex = null;
+
+          if  (dijkstra.getShortestPathTo(v[i+1]).size() > 0)   {
+            targetVertex = ( dijkstra.getShortestPathTo(v[i+1]).get((dijkstra.getShortestPathTo(v[i+1]).size())-1)).toString();
+           }
+
+          if  (dijkstra.getShortestPathTo(v[i+1]).size() > 1)   {
+            sourceVertex = ( dijkstra.getShortestPathTo(v[i+1]).get((dijkstra.getShortestPathTo(v[i+1]).size())-2)).toString();
+           }
+
+            //verifica a distancia 
+          
+          for (int s = 0; s < graph.getRoutes().size(); s++){
+          if ( (graph.getRoutes().get(s).getSource().equals(sourceVertex))  && (graph.getRoutes().get(s).getTarget().equals(targetVertex)) ){
+                  distancia = (graph.getRoutes().get(s).getDistance());
+                  distanciaTotal = distancia + distanciaTotal;
+                  
+          }
+          }
+      
+
+        }
+
+
+
+
+
+        System.out.println(distanciaTotal);
+
+
 
         return distancia;
      
      }
+    
 }
 
 
