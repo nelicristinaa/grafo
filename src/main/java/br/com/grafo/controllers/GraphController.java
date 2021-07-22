@@ -89,7 +89,7 @@ public class GraphController {
 
     } 
 
-    @PostMapping("/graphe/{id}")
+    @PostMapping("/distance/{id}")
     public HashMap<Object, Object>  path(@RequestBody Path path, @PathVariable("id") Long id ){
      /*  System.out.println("oi" + routeRepository.verifica()); */
       Optional<Graph> graphFind = this.graphRepository.findById(id);
@@ -109,8 +109,9 @@ public class GraphController {
      
       HashMap<Object, Object> map = new HashMap<>();
      
-      map.put("distance", distance);
       map.put("path", path.getPath());
+      map.put("distance", distance);
+      
       
         return map;            
 
