@@ -8,52 +8,15 @@ import br.com.grafo.model.Graph;
 import br.com.grafo.model.Path;
 
 public class App {
-    public static void main(String[] args) {
-        Vertex v1 = new Vertex("A");
-        Vertex v2 = new Vertex("B");
-        Vertex v3 = new Vertex("C");
-        
-        Vertex [] v = new Vertex[10]; 
-        v[0] = new Vertex("A");   
-        v[1] = new Vertex("B");      
-        v[2] = new Vertex("C");      
-        v[3] = new Vertex("D");          
-        v[4] = new Vertex("E");    
-        
+   
 
-        v[0].addNeighbour(new Edge(6, v[0], v[1]));
-        v[0].addNeighbour(new Edge(4, v[0], v[4]));
-        v[1].addNeighbour(new Edge(6, v[1], v[0]));
-        v[1].addNeighbour(new Edge(2, v[1], v[2]));
-
-        v[1].addNeighbour(new Edge(4, v[1], v[3]));
-        v[2].addNeighbour(new Edge(3, v[2], v[1]));
-        v[2].addNeighbour(new Edge(1, v[2], v[3]));
-        v[2].addNeighbour(new Edge(7, v[2], v[4]));
-        v[4].addNeighbour(new Edge(5, v[4], v[1]));
-        v[4].addNeighbour(new Edge(7, v[4], v[3]));
-       
-         
-
-        
-        Dijkstra dijkstra = new Dijkstra();
-        dijkstra.computePath(v[0]); //ponto inicial
-        System.out.println(dijkstra.getShortestPathTo(v[1])); //ponto final
-
-        dijkstra.computePath(v[1]); //ponto inicial
-        System.out.println(dijkstra.getShortestPathTo(v[2])); //ponto final 
-
-        dijkstra.computePath(v[2]); //ponto inicial
-        System.out.println(dijkstra.getShortestPathTo(v[3])); //ponto final
-    }
-
-    public void calc(Path path, Graph graph){
+    public int calc(Path path, Graph graph){
 
         Vertex [] v = new Vertex[28]; 
         String  [] x = {"A","B","C","D","E","G","H","L","M","N","O","p","Q","R","S","T","U","V","W","X","Y","Z" };
         for(int i = 0; i < 20; i++){
                  
-          System.out.println("x = " + x[i]);        
+       //   System.out.println("x = " + x[i]);        
           v[i] = new Vertex(x[i]); 
         }
 
@@ -64,10 +27,7 @@ public class App {
             int target = 0;
             int distance = graph.getRoutes().get(i).getDistance();
 
-            
-            System.out.println(graph.getRoutes().get(i).getSource());
-            System.out.println(graph.getRoutes().get(i).getTarget());
-            System.out.println(graph.getRoutes().get(i).getDistance());
+     
             
            
            
@@ -108,7 +68,7 @@ public class App {
             Dijkstra dijkstra = new Dijkstra();
             dijkstra.computePath(v[verticeInt[i]]); 
             System.out.println(dijkstra.getShortestPathTo(v[i+1])); 
-      //   System.out.println( dijkstra.getShortestPathTo(v[i+1]).size());
+     
             
        if  (dijkstra.getShortestPathTo(v[i+1]).size() > 0)   {
         targetVertex = ( dijkstra.getShortestPathTo(v[i+1]).get((dijkstra.getShortestPathTo(v[i+1]).size())-1)).toString();
@@ -117,8 +77,7 @@ public class App {
        if  (dijkstra.getShortestPathTo(v[i+1]).size() > 1)   {
         sourceVertex = ( dijkstra.getShortestPathTo(v[i+1]).get((dijkstra.getShortestPathTo(v[i+1]).size())-2)).toString();
        }
-         System.out.println(sourceVertex);
-         System.out.println(targetVertex);
+
          
       //verifica a distancia 
       int distancia;
@@ -135,14 +94,16 @@ public class App {
         }
 
 
-        System.out.println("Distancia:" + distanciaTotal);
+        System.out.println("Distancia Total:" + distanciaTotal);
+
+        return distanciaTotal;
     }
 
     public void addVizinho(Vertex source, int distance, Vertex target ){
 
         source.addNeighbour(new Edge(distance, source, target));
 
-
+   
     }
 
     public int converteVertice(String dado){

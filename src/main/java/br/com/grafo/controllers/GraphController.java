@@ -68,6 +68,7 @@ public class GraphController {
     public Graph graph(@PathVariable("id") Long id) {
   
       Optional<Graph> userFind = this.graphRepository.findById(id);
+
       
   
       if (userFind.isPresent()) {
@@ -88,15 +89,14 @@ public class GraphController {
     public Path path(@RequestBody Path path, @PathVariable("id") Long id ){
      /*  System.out.println("oi" + routeRepository.verifica()); */
       Optional<Graph> graphFind = this.graphRepository.findById(id);
-      
+      int distancia;
  
       App app = new App();
       if (graphFind.isPresent()) {
       
-        app.calc(path, graphFind.get() );
-
-       /*  System.out.println(graphFind.get().getId().toString());
-        System.out.println(graphFind.get().getRoutes().get(1).getSource()); */
+        distancia = app.calc(path, graphFind.get());
+        System.out.println(distancia);
+         
         
       } else {
         System.out.println("grafo não existe");
