@@ -98,22 +98,31 @@ public class GraphController {
       App app = new App();
       if (graphFind.isPresent()) {
       
-        distancia = app.calc(path, graphFind.get());
-        System.out.println(distancia);
+        distancia = app.calc(path, graphFind.get()); 
+        String distance = Integer.toString(distancia); 
+        HashMap<Object, Object> map = new HashMap<>();
+     
+       
+        map.put("distance", distance);
         
+        
+          return map;      
         
       } else {
         System.out.println("grafo não existe");
+        HashMap<Object, Object> map = new HashMap<>();
+     
+        map.put("response", "HTTP NOT FOUND");
+        
+        
+        
+          return map;            
+  
+
       }
-      String distance = Integer.toString(distancia);
-     
-      HashMap<Object, Object> map = new HashMap<>();
-     
-      map.put("path", path.getPath());
-      map.put("distance", distance);
       
-      
-        return map;            
+     
+                
 
     } 
 
