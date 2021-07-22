@@ -2,11 +2,15 @@ package br.com.grafo.controllers;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.persistence.Query;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -86,24 +90,29 @@ public class GraphController {
     } 
 
     @PostMapping("/graphe/{id}")
-    public Path path(@RequestBody Path path, @PathVariable("id") Long id ){
+    public HashMap<Object, Object>  path(@RequestBody Path path, @PathVariable("id") Long id ){
      /*  System.out.println("oi" + routeRepository.verifica()); */
       Optional<Graph> graphFind = this.graphRepository.findById(id);
-      int distancia;
+      int distancia = 0;
  
       App app = new App();
       if (graphFind.isPresent()) {
       
         distancia = app.calc(path, graphFind.get());
         System.out.println(distancia);
-         
+        
         
       } else {
         System.out.println("grafo não existe");
       }
- 
-
-        return path;            
+      String distance = Integer.toString(distancia);
+     
+      HashMap<Object, Object> map = new HashMap<>();
+     
+      map.put("distance", distance);
+      map.put("path", path.getPath());
+      
+        return map;            
 
     } 
 
