@@ -33,6 +33,8 @@ import br.com.grafo.model.Graph;
 import br.com.grafo.model.Path;
 import br.com.grafo.model.Route;
 import javassist.expr.NewArray;
+
+import org.springframework.data.geo.Distance;
 import org.springframework.data.jpa.repository.*;
 
 
@@ -96,7 +98,7 @@ public class GraphController {
       int distancia = 0;
  
       App app = new App();
-      if (graphFind.isPresent()) {
+     
       
         distancia = app.calc(path, graphFind.get()); 
         String distance = Integer.toString(distancia); 
@@ -107,24 +109,18 @@ public class GraphController {
         
           return map;      
         
-      } else {
-        System.out.println("grafo não existe");
-        HashMap<Object, Object> map = new HashMap<>();
      
-        map.put("response", "HTTP NOT FOUND");
-                      
-          return map;            
-        }
     } 
 
-
+  
+   
 
     @PostMapping("/distance/{graphId}/from/{town1}/to/{town2}")
     public HashMap<Object, Object> distbairros(@RequestBody Path path, @PathVariable("graphId") Long id, @PathVariable("town1") String town1, @PathVariable("town2") String town2 ){
       
       Optional<Graph> graphFind = this.graphRepository.findById(id);
       App app = new App();
-      if (graphFind.isPresent()) {
+     
 
         String[] arrayRetorno = app.calcDistVizinhos(town1, town2, graphFind.get());
 
@@ -135,12 +131,7 @@ public class GraphController {
 
         return map;      
         
-      } 
-
-      HashMap<Object, Object> map = new HashMap<>();     
-      map.put("response", "HTTP NOT FOUND");    
-                   
-      return map;  
+     
 
     }
 
