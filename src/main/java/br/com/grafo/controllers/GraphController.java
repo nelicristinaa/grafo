@@ -125,11 +125,14 @@ public class GraphController {
       Optional<Graph> graphFind = this.graphRepository.findById(id);
       App app = new App();
       if (graphFind.isPresent()) {
-        
-        app.calcDistVizinhos(town1, town2, graphFind.get());
+
+        String[] arrayRetorno = app.calcDistVizinhos(town1, town2, graphFind.get());
+
         HashMap<Object, Object> map = new HashMap<>();     
        
-        map.put("distance", graphFind);      
+        map.put("distance", arrayRetorno[0]);
+        map.put("path", arrayRetorno[1]);
+
         return map;      
         
       } 

@@ -194,7 +194,7 @@ public class App {
     }
 
 
-    public int calcDistVizinhos(String town1, String town2, Graph graph){
+    public String [] calcDistVizinhos(String town1, String town2, Graph graph){
         int distancia = 0; 
         int distanciaTotal = 0;
 
@@ -236,7 +236,8 @@ public class App {
         Dijkstra dijkstra = new Dijkstra();
         dijkstra.computePath(v[verticeSource]); 
         System.out.println(dijkstra.getShortestPathTo(v[verticeTarget])); 
-       
+        String resposta = dijkstra.getShortestPathTo(v[verticeTarget]).toString();
+        System.out.println(resposta);
         //converte para um array de string
         String[] vertice = new String[dijkstra.getShortestPathTo(v[verticeTarget]).size()]; 
         for (int j = 0; j < dijkstra.getShortestPathTo(v[verticeTarget]).size(); j++){
@@ -277,9 +278,9 @@ public class App {
 
         System.out.println(distanciaTotal);
 
+       
 
-
-        return distancia;
+        return new String[] {Integer.toString(distanciaTotal), resposta};
      
      }
     
